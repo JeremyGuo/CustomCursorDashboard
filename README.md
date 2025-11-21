@@ -2,6 +2,8 @@
 
 [中文文档](README_zh.md) | English
 
+> **🎯 Project Purpose**: This framework is specifically designed for **agile development with Cursor** while implementing **strict permission management**. It enables teams to rapidly develop services using Cursor AI assistance while maintaining enterprise-grade security controls through JWT authentication, role-based access control, and service-level authorization.
+
 A modern frontend service framework based on Node.js + TypeScript, featuring Apple-style flat design with built-in user registration approval, permission management, route validation, and API proxy capabilities. Helps teams rapidly iterate various business pages in the `services/*` directory.
 
 ## Core Features

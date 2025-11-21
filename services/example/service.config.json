@@ -1,0 +1,10 @@
+{
+  "id": "example",
+  "name": "示例服务",
+  "description": "用于演示的默认服务",
+  "entryHtml": "public/index.html",
+  "entryScript": "dist/main.js",
+  "requiredRoles": ["service:example"],
+  "proxyRewrite": "/api",
+  "proxyTarget": "${API_PROXY_TARGET}"
+}

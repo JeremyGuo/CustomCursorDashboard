@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/public/global.css" />
+    <link rel="stylesheet" href="/public/app.css" />
+  </head>
+  <body>
+    <div id="app-shell">
+      <!-- 顶部导航栏 -->
+      <nav class="topbar">
+        <div class="topbar-left">
+          <div class="brand">Dashboard</div>
+          <div id="service-tabs" class="service-tabs"></div>
+        </div>
+        <div class="topbar-right">
+          <button id="user-menu-btn" class="user-menu-btn" aria-label="用户菜单">
+            <span id="user-avatar" class="avatar">?</span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- 用户菜单弹窗 -->
+      <div id="user-menu" class="user-menu hidden">
+        <div class="user-menu-header">
+          <div id="user-menu-info">未登录</div>
+        </div>
+        <div class="user-menu-body">
+          <form id="login-form" class="menu-form">
+            <input name="username" placeholder="用户名" required />
+            <input name="password" type="password" placeholder="密码" required />
+            <button type="submit">登录</button>
+          </form>
+          <button id="show-register-btn" class="link-btn">注册账号</button>
+          <button id="show-change-password-btn" class="link-btn hidden">修改密码</button>
+          <button id="show-admin-btn" class="link-btn admin-only hidden">管理面板</button>
+          <button id="logout-btn" class="link-btn hidden">退出登录</button>
+        </div>
+      </div>
+
+      <!-- 注册弹窗 -->
+      <div id="register-modal" class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>注册账号</h3>
+            <button class="close-btn" data-close="register-modal">&times;</button>
+          </div>
+          <form id="register-form" class="modal-form">
+            <label>
+              用户名
+              <input name="username" required />
+            </label>
+            <label>
+              密码
+              <input name="password" type="password" required />
+            </label>
+            <button type="submit">提交注册申请</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 管理面板弹窗 -->
+      <div id="admin-modal" class="modal hidden">
+        <div class="modal-content large">
+          <div class="modal-header">
+            <h3>管理面板</h3>
+            <button class="close-btn" data-close="admin-modal">&times;</button>
+          </div>
+          <div class="modal-tabs">
+            <button class="tab-btn active" data-tab="users">用户管理</button>
+            <button class="tab-btn" data-tab="requests">注册审批</button>
+            <button class="tab-btn" data-tab="services">服务管理</button>
+          </div>
+          <div class="modal-body">
+            <!-- 用户管理 -->
+            <div id="tab-users" class="tab-content active">
+              <div id="users-list" class="data-list"></div>
+            </div>
+            <!-- 注册审批 -->
+            <div id="tab-requests" class="tab-content">
+              <div id="requests-list" class="data-list"></div>
+            </div>
+            <!-- 服务管理 -->
+            <div id="tab-services" class="tab-content">
+              <div id="services-admin-list" class="data-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 编辑用户弹窗 -->
+      <div id="edit-user-modal" class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>编辑用户权限</h3>
+            <button class="close-btn" data-close="edit-user-modal">&times;</button>
+          </div>
+          <form id="edit-user-form" class="modal-form">
+            <input type="hidden" name="userId" />
+            <label>
+              用户名
+              <input name="username" disabled />
+            </label>
+            <label>
+              角色（逗号分隔）
+              <input name="roles" placeholder="admin,user" />
+            </label>
+            <label>
+              服务（逗号分隔）
+              <input name="services" placeholder="example,analytics" />
+            </label>
+            <button type="submit">保存</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 修改密码弹窗 -->
+      <div id="change-password-modal" class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>修改密码</h3>
+            <button class="close-btn" data-close="change-password-modal">&times;</button>
+          </div>
+          <form id="change-password-form" class="modal-form">
+            <label>
+              当前密码
+              <input name="oldPassword" type="password" required />
+            </label>
+            <label>
+              新密码
+              <input name="newPassword" type="password" required minlength="6" />
+            </label>
+            <label>
+              确认新密码
+              <input name="confirmPassword" type="password" required minlength="6" />
+            </label>
+            <button type="submit">保存</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 编辑服务弹窗 -->
+      <div id="edit-service-modal" class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>编辑服务配置</h3>
+            <button class="close-btn" data-close="edit-service-modal">&times;</button>
+          </div>
+          <form id="edit-service-form" class="modal-form">
+            <input type="hidden" name="serviceId" />
+            <label>
+              服务 ID
+              <input name="id" disabled />
+            </label>
+            <label>
+              服务名称
+              <input name="name" required />
+            </label>
+            <label>
+              描述
+              <input name="description" />
+            </label>
+            <label>
+              要求角色（逗号分隔）
+              <input name="requiredRoles" placeholder="service:example,admin" />
+            </label>
+            <label>
+              代理目标地址
+              <input name="proxyTarget" placeholder="http://localhost:4000" />
+            </label>
+            <label>
+              代理重写路径
+              <input name="proxyRewrite" placeholder="/api" />
+            </label>
+            <button type="submit">保存</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 主工作区 -->
+      <main class="workspace">
+        <div id="welcome-screen" class="welcome-screen">
+          <div class="welcome-content">
+            <h1>欢迎使用 Dashboard</h1>
+            <p>请登录并选择服务开始工作</p>
+          </div>
+        </div>
+        <iframe id="service-frame" class="service-frame hidden" title="Service View" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals" referrerpolicy="no-referrer"></iframe>
+      </main>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <script type="module" src="/public/app.js"></script>
+  </body>
+</html>

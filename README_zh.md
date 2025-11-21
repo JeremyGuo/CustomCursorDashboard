@@ -1,5 +1,7 @@
 # Custom Dashboard Framework
 
+中文 | [English Documentation](README.md)
+
 基于 Node.js + TypeScript 的现代化前端服务框架，采用 Apple 风格扁平设计，内置用户注册审批、权限管理、路由校验与 API 代理能力，帮助团队在 `services/*` 目录敏捷迭代各类业务页面。
 
 ## 核心能力
@@ -124,7 +126,7 @@ services/
 1. 复制 `services/example` 作为模板，更名为 `services/<serviceId>`。
 2. 更新 `service.config.json`：
    - `requiredRoles`、`proxyRewrite`、`proxyTarget`。
-3. 在 `frontend/` 编写页面逻辑，入口为 `frontend/main.tsx`。
+3. **使用 Cursor 实现服务**：配置完必要的内容后，让 Cursor 实现服务逻辑。Cursor 会遵循 `.cursorrules` 规范，在 `frontend/` 目录下创建前端代码。
 4. `npm run build:services` 生成 `dist/main.js`。
 5. 确保页面引入 `/public/global.css` 并遵守 `.cursorrules` UI 规范，特别是 `WORKBLOOK.md` 及时记录。
 
@@ -265,7 +267,7 @@ services/
    }
    ```
 
-3. 编写前端代码：`services/新服务名/frontend/`
+3. **使用 Cursor 实现服务**：配置完必要的内容后，让 Cursor 实现服务逻辑。Cursor 会遵循 `.cursorrules` 规范，在 `services/新服务名/frontend/` 目录下创建前端代码。
 
 4. 构建：
    ```bash

@@ -1,5 +1,7 @@
 # Custom Dashboard Framework
 
+[中文文档](README_zh.md) | English
+
 A modern frontend service framework based on Node.js + TypeScript, featuring Apple-style flat design with built-in user registration approval, permission management, route validation, and API proxy capabilities. Helps teams rapidly iterate various business pages in the `services/*` directory.
 
 ## Core Features
@@ -124,7 +126,7 @@ services/
 1. Copy `services/example` as a template, rename to `services/<serviceId>`.
 2. Update `service.config.json`:
    - `requiredRoles`, `proxyRewrite`, `proxyTarget`.
-3. Write page logic in `frontend/`, entry point is `frontend/main.tsx`.
+3. **Let Cursor implement the service**: After configuring the necessary content, use Cursor to implement the service logic. Cursor will follow the `.cursorrules` standards and create the frontend code in `frontend/` directory.
 4. Run `npm run build:services` to generate `dist/main.js`.
 5. Ensure pages import `/public/global.css` and follow `.cursorrules` UI standards, especially keep `WORKBLOOK.md` updated in time.
 
@@ -265,7 +267,7 @@ Frontend can access directly via `window.__SERVICE_CONTEXT__`.
    }
    ```
 
-3. Write frontend code: `services/new-service-name/frontend/`
+3. **Let Cursor implement the service**: After configuring the necessary content, use Cursor to implement the service logic. Cursor will follow the `.cursorrules` standards and create the frontend code in `services/new-service-name/frontend/`.
 
 4. Build:
    ```bash
